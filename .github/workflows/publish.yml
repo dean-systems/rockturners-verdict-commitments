@@ -1,0 +1,84 @@
+name: Publish verdict commitments
+
+# Copies each newly published commitment from the RockTurners API into
+# commitments/ and timestamps it with OpenTimestamps. Runs every six hours.
+# The API holds no credential for this repository: this job pulls.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Fetch and timestamp, but don't commit"
+        type: boolean
+        default: false
+      lookback_days:
+        description: "UTC days to look back"
+        type: string
+        default: "3"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    defaults:
+      run:
+        # bash -eo pipefail: a failing command anywhere in a pipeline fails the step,
+        # so a fetch error (or the tamper alarm) can never be hidden by `tee`.
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check the reference implementation
+        run: python3 -I reference/merkle.py selftest
+
+      - name: Install the OpenTimestamps client (hash-pinned, in a venv)
+        run: |
+          python3 -m venv "$RUNNER_TEMP/ots"
+          "$RUNNER_TEMP/ots/bin/pip" install --require-hashes --only-binary=:all: -r tools/requirements.txt
+          echo "$RUNNER_TEMP/ots/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch new commitments
+        env:
+          COMMITMENTS_API: ${{ vars.COMMITMENTS_API }}
+          LOOKBACK_DAYS: ${{ inputs.lookback_days || '3' }}
+        run: python3 -I tools/fetch_commitments.py | tee new-files.txt
+
+      - name: Timestamp every file without a proof, and upgrade pending proofs
+        run: |
+          mkdir -p commitments
+          # Stamp by what's missing, not by what this run fetched, so a file that
+          # somehow reached the repo without a proof is always caught up.
+          find commitments -name '*.json' -print0 | while IFS= read -r -d '' file; do
+            [ -f "$file.ots" ] || ots stamp "$file"
+          done
+          # A proof stays pending until a Bitcoin block confirms it (a few hours);
+          # upgrading a pending proof exits non-zero, so each one is tolerated.
+          find commitments -name '*.ots' -print0 | while IFS= read -r -d '' proof; do
+            ots upgrade "$proof" || true
+          done
+          # ots upgrade keeps the previous proof as .bak; the git history already does.
+          find commitments -name '*.bak' -delete
+
+      - name: Commit
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add commitments
+          if git diff --cached --quiet; then
+            echo "Nothing new."
+          else
+            git commit -m "Commitments and timestamps $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
