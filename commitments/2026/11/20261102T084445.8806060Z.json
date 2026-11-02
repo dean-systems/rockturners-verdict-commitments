@@ -1,0 +1,39 @@
+{
+  "algorithm": "sha256-merkle-v1",
+  "claim_at": "2026-11-02T06:00:31.4186410Z",
+  "committed_at": "2026-11-02T08:44:45.8806060Z",
+  "completed_at": "2026-11-02T08:36:50.4085390Z",
+  "date": "2026-11-02",
+  "leaf_count": 254,
+  "root_hex": "c1fbf9625794c0cdcadead2f9be18b46e2e017aa9c3cf67b1527ec39979d022d",
+  "scope": {
+    "exclusions": "none",
+    "scan_ids": [
+      "1ae15b6c-810e-41fe-9b0d-861f17a83955",
+      "28cd91da-09a9-4cf0-88ba-530006d9939c",
+      "47e78760-e275-4038-83ff-a64c58d53583",
+      "543808ef-aa28-421b-8ccd-5e2074f7fce0",
+      "660c7cee-b424-4592-8280-a5e43780890d",
+      "802cf6f5-62a3-4d0e-9ec9-1964f840e422",
+      "847cf95e-1e4a-4cb4-a415-077a7b341a7f",
+      "8c53f4b8-9f51-4fab-b4f6-e5346f7df14a",
+      "c4800f6f-c758-4fcf-abc0-ee31605ada38",
+      "d616f99b-0b9c-4598-9ffa-5826e7985e11"
+    ],
+    "scans_in_flight": 0,
+    "scans_stopped_by_watchdog": 0,
+    "strategy_ids": [
+      "05925adb-5c9f-4c7a-ad14-f56800a21e61",
+      "0cd59522-89a9-43f7-b634-4d7c488ed0ea",
+      "12ed0d71-694a-46fb-80c9-73b1eec2d5a4",
+      "1d1fed8a-177f-4d13-ad5a-5f3a61cce6f9",
+      "23dcd218-ea06-4628-bd2c-3f300798c190",
+      "4419bd57-fc1b-4fec-a44f-5b2dc09747d9",
+      "8245c727-2384-4753-9c59-69f30f9c8d92",
+      "b0d895ac-f90a-4fad-b9a3-8151a325bb0e",
+      "e0023144-fb8b-43e2-95ff-208aef2ad241",
+      "ff643a96-f123-4ac4-8b2d-7f144ca54da0"
+    ],
+    "ticker_count": 214
+  }
+}
