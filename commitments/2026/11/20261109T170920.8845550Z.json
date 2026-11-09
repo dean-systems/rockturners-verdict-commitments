@@ -1,0 +1,43 @@
+{
+  "algorithm": "sha256-merkle-v1",
+  "claim_at": "2026-11-09T06:00:51.7182640Z",
+  "committed_at": "2026-11-09T17:09:20.8845550Z",
+  "completed_at": "2026-11-09T16:59:38.3034830Z",
+  "date": "2026-11-09",
+  "leaf_count": 336,
+  "root_hex": "b8a1266a52bb028aeb4cfbccbd6c1a7af045894f0e0bdf94b428cc15f1981486",
+  "scope": {
+    "exclusions": "rows_written_later_by_in_flight_scans",
+    "scan_ids": [
+      "2ddbf7bc-48dc-4380-8475-6a1c64f469cc",
+      "38eb6f9f-bb8e-4ae9-be8f-1eb09dc9817d",
+      "41c50470-cb88-46bd-b8eb-54f21838eb17",
+      "48a5fd7e-1f32-4cc5-9351-bae6772b56b0",
+      "4ee40a6d-2df8-4f0c-8146-9dec7d10e70f",
+      "5588b778-81e7-4bf5-98de-064b2ab6f9f4",
+      "643d43e1-90e5-42c2-b104-145f42ff1384",
+      "7201602f-523a-44ff-b313-734a56e26999",
+      "7e8df938-b2e6-4bc0-b59b-03183e249114",
+      "94d6ceb6-d5ef-40f4-ae04-fe591601760c",
+      "ae8695a3-2f64-4451-89f0-7912e15a5f46",
+      "c7640bdd-77b8-443d-b673-a63a9554cf46",
+      "ed337401-88b4-4505-bc05-ec7800aba09d",
+      "f7cd4c17-517c-4a8e-b166-b00269a4cf9d"
+    ],
+    "scans_in_flight": 0,
+    "scans_stopped_by_watchdog": 2,
+    "strategy_ids": [
+      "05925adb-5c9f-4c7a-ad14-f56800a21e61",
+      "0cd59522-89a9-43f7-b634-4d7c488ed0ea",
+      "12ed0d71-694a-46fb-80c9-73b1eec2d5a4",
+      "1d1fed8a-177f-4d13-ad5a-5f3a61cce6f9",
+      "23dcd218-ea06-4628-bd2c-3f300798c190",
+      "4419bd57-fc1b-4fec-a44f-5b2dc09747d9",
+      "8245c727-2384-4753-9c59-69f30f9c8d92",
+      "b0d895ac-f90a-4fad-b9a3-8151a325bb0e",
+      "e0023144-fb8b-43e2-95ff-208aef2ad241",
+      "ff643a96-f123-4ac4-8b2d-7f144ca54da0"
+    ],
+    "ticker_count": 218
+  }
+}
